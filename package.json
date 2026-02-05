@@ -1,0 +1,24 @@
+{
+  "name": "34_cps630_a1",
+  "version": "1.0.0",
+  "description": "CPS630 A1 - Group 34",
+  "homepage": "https://github.com/W-26-CPS630-Group-34/34_CPS630_A1#readme",
+  "bugs": {
+    "url": "https://github.com/W-26-CPS630-Group-34/34_CPS630_A1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/W-26-CPS630-Group-34/34_CPS630_A1.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

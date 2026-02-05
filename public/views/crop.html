@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Delete Levels!</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- POST Form -->
+    <div id="new-crop">
+        <h2>Add New Level</h2>
+        <form id="new-form">
+            <input type="number"    id="new-id"     placeholder="ID"            required>
+            <input type="text"      id="new-src"    placeholder="src"           required>
+            <input type="text"      id="new-answer" placeholder="Answer"        required>
+            <input type="number"    id="new-zoom"   placeholder="Zoom"          required>
+            <input type="number"    id="new-x"      placeholder="Offset X"      required>
+            <input type="number"    id="new-y"      placeholder="Offset y"      required>
+            <button type="submit">Add Level</button>
+        </form>
+    </div>
+
+    <!-- DELETE Form -->
+    <div id="delete-crop">
+        <h2>Delete Level</h2>
+        <form id="delete-form">
+            <input type="number"    id="delete-id" placeholder="ID to Delete" required>
+            <button type="submit">Delete Level</button>
+        </form>
+    </div>
+    <script src="js/crop.js"></script>
+</body>
+</html>
