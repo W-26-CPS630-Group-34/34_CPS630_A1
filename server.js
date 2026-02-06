@@ -6,37 +6,38 @@ const PORT      = 8080;     // default web: 80. default relational db: 443
 
 // put list of JSONs here
 crops = [
-    {id:1, src:"assets/cake.jpg", answer:"cake", zoom:1, x:0, y:0},
-    {id:2, src:"assets/tiger.jpg", answer:"tiger", zoom:1, x:0, y:0},
-    {id:3, src:"assets/cookie.jpg", answer:"cookie", zoom:1, x:0, y:0},
-    {id:4, src:"assets/cupcake.jpg", answer:"cupcake", zoom:1, x:0, y:0},
-    {id:5, src:"assets/elephant.jpg", answer:"elephant", zoom:1, x:0, y:0},
-    {id:6, src:"assets/keyboard.jpg", answer:"keyboard", zoom:1, x:0, y:0},
-    {id:7, src:"assets/waterfall.jpg", answer:"waterfall", zoom:1, x:0, y:0},
-    {id:8, src:"assets/pizza.jpg", answer:"pizza", zoom:1, x:0, y:0},
-    {id:9, src:"assets/popcorn.jpg", answer:"popcorn", zoom:1, x:0, y:0},
-    {id:10, src:"assets/pyramids.jpg", answer:"pyramids", zoom:1, x:0, y:0},
-    {id:11, src:"assets/strawberry.jpg", answer:"strawberry", zoom:1, x:0, y:0},
-    {id:12, src:"assets/zebra.jpg", answer:"zebra", zoom:1, x:0, y:0},
+    {id:1, src:"/assets/cake.jpg", answer:"cake", zoom:1, x:0, y:0},
+    {id:2, src:"/assets/tiger.jpg", answer:"tiger", zoom:1, x:0, y:0},
+    {id:3, src:"/assets/cookie.jpg", answer:"cookie", zoom:1, x:0, y:0},
+    {id:4, src:"/assets/cupcake.jpg", answer:"cupcake", zoom:1, x:0, y:0},
+    {id:5, src:"/assets/elephant.jpg", answer:"elephant", zoom:1, x:0, y:0},
+    {id:6, src:"/assets/keyboard.jpg", answer:"keyboard", zoom:1, x:0, y:0},
+    {id:7, src:"/assets/waterfall.jpg", answer:"waterfall", zoom:1, x:0, y:0},
+    {id:8, src:"/assets/pizza.jpg", answer:"pizza", zoom:1, x:0, y:0},
+    {id:9, src:"/assets/popcorn.jpg", answer:"popcorn", zoom:1, x:0, y:0},
+    {id:10, src:"/assets/pyramids.jpg", answer:"pyramids", zoom:1, x:0, y:0},
+    {id:11, src:"/assets/strawberry.jpg", answer:"strawberry", zoom:1, x:0, y:0},
+    {id:12, src:"/assets/zebra.jpg", answer:"zebra", zoom:1, x:0, y:0},
 ]
 
 //static files path
 //we want to serve static files from the public folder as we don't want clients to have access to server files
-app.use('/', express.static(path.join(__dirname, '/public')));
+app.use('/', express.static(path.join(__dirname, 'public')));
+
 
 // route to main page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/views/index.html'));
+    res.sendFile(path.join(__dirname, '/public/views/index.html'));
 });
 
 // route to play game
 app.get('/play', (req, res) => {
-    res.sendFile(path.join(__dirname, '/views/game.html'));
+    res.sendFile(path.join(__dirname, '/public/views/game.html'));
 });
 
 // route to add/drop levels
 app.get('/crop', (req, res) => {
-    res.sendFile(path.join(__dirname, '/views/crop.html'));
+    res.sendFile(path.join(__dirname, '/public/views/crop.html'));
 });
 
 // may include more to fulfil rubric (about, contact, etc.)
