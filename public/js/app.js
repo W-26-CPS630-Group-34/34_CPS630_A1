@@ -1,4 +1,4 @@
-// loading funtions
+// loading functions
 async function loadCrop(id) {
     try {
         const response = await fetch(`/api/crop/id/${id}`);
@@ -23,12 +23,47 @@ async function loadAll() {
 
 // initGame(crop)
 function initGame(crop){
+    const src = crop.src;
+    const answer = crop.answer;
+    const zoom = crop.zoom;
+    const x = crop.x;
+    const y = crop.y;
+
+    let divH = document.querySelector('#heading');
+    let divImg = document.querySelector('#image');
+    let divInt = document.querySelector('#interact');
+
     // Step 1: Load the game screen
-
+    divH.innerHTML = "<h1>WHAT IS THIS?</h1>";
+    divImg.innerHTML = `<img src="${src}" height="100">`;
+    img.style.transform = `scale(${zoom}) translate(${x}%, ${y}%)`;
+    divInt.innerHTML = `
+        <form id="guess-form">
+            <input type="text" id="guess" required>
+            <button type="submit">Guess!</button>
+        </form>
+        `;
     // Step 2: wait for a response
+    document.querySelector('#guess-form').addEventListener('submit', async (e) => {
+        e.preventDefault(); //prevent form submission
+        img.style.transform = `translate(${-x}%, ${-y}%) scale(1)`;
+        const article = (['a', 'e', 'i', 'o', 'u'].includes[answer[0]]) ? 'an' : 'a';
+        divInt.innerHTML = `
+        <h3>This is ${article} ${answer}</h3>
+        <form id="next-form">
+            <button type="submit">Next!</button>
+        </form>
+        `;
+        const guess = document.querySelector('#guess').value;
+        divH.innerHTML = (guess.trim().toLowerCase() == answer) ? "<h1>CORRECT!</h1>" : "<h1>INCORREC!T</h1>";
+    });
 
-    // Step 3: On response, provide an answer and clear the dom
-
+    document.querySelector('#next-form').addEventListener('submit', async (e) => {
+        e.preventDefault(); //prevent form submission
+        divH.innerHTML = "";
+        divImg.innerHTML = "";
+        divInt.innerHTML = "";
+    });
 }
 
 
@@ -73,3 +108,6 @@ if (range == '') {
 }
 
 // when game is over, redirect back to root (index.html)
+    document.querySelector('#heading').innerHTML = "<h1>THANKS FOR PLAYING!</h1>";
+    document.querySelector('#image').innerHTML = "<h3>Click the button below to head back to the home page</h3>";
+    document.querySelector('#interact').innerHTML = `<a href="/" class="btn">Home</a>`;
