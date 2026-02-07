@@ -53,7 +53,7 @@ app.get('/api/crop', (req, res) => {
 //get a level
 app.get('/api/crop/id/:id', (req, res) => {
     const id = parseInt(req.params.id);
-    const crop = crops.find(c => c.id === id);
+    const crop = crops.find(c => c.id == id);
 
     if (crop) {
         res.status(200).json(crop); //status code 200 = OK

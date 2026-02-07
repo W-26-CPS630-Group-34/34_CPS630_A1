@@ -1,28 +1,35 @@
 (async function main() {
     const params = new URLSearchParams(window.location.search);
     let range = params.get('range') || '';
-    const crops = await loadCrops();
-    if (!crops || crops.length === 0) return;
     let listOfCrops = [];
     if (range != '') {
-        range.split(",");
+        range = range.split(",");
         let ids = []
 
-        range.forEach(value => {
-            value = value.trim()
-            if (value.length == 1 && !ids.includes(value)) {
-                ids.push(parseInt(value));
+        for(value of range) {
+            value = value.trim();
+            console.log(value);
+            if (value.length == 1) {
+                value = parseInt(value);
+                if (!ids.includes(value)) ids.push(value);
             } else {
-                value.split("-");
-                for (let i = parseInt(value[0]); i <= parseInt(value[1]); i++) {
-                    if (!ids.includes(value)) ids.push(parseInt(value));
+                value = value.split("-");
+                for (let i = parseInt(value[0].trim()); i <= parseInt(value[1].trim()); i++) {
+                    if (!ids.includes(i)) ids.push(i);
                 }
             }
-        });
+        }
+
+        for(id of ids){
+            const crop = await loadCrop(id);
+            if (crop) listOfCrops.push(crop);
+        }
 
     } else {
+        const crops = await loadCrops();
         listOfCrops = crops;
     }
+
     for (const crop of listOfCrops) {
         await initGame(crop); // waits for player to hit Next
     }
@@ -42,6 +49,17 @@ async function loadCrops() {
         console.error('Error loading levels:', error);
     }
     return [];
+}
+
+async function loadCrop(id) {
+    try {
+        const response = await fetch(`/api/crop/id/${id}`);
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error loading level:', error);
+    }
+    return {};
 }
 
 
