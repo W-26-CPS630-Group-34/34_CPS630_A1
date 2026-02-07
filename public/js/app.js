@@ -29,7 +29,7 @@
         const crops = await loadCrops();
         listOfCrops = crops;
     }
-
+    listOfCrops.sort( () => Math.random()-0.5 );
     for (const crop of listOfCrops) {
         await initGame(crop); // waits for player to hit Next
     }
