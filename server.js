@@ -15,7 +15,7 @@ crops = [
     {id:7, src:"/assets/waterfall.jpg", answer:"waterfall", zoom:1, x:0, y:0},
     {id:8, src:"/assets/pizza.jpg", answer:"pizza", zoom:1, x:0, y:0},
     {id:9, src:"/assets/popcorn.jpg", answer:"popcorn", zoom:1, x:0, y:0},
-    {id:10, src:"/assets/pyramids.jpg", answer:"pyramids", zoom:1, x:0, y:0},
+    {id:10, src:"/assets/cat.jpg", answer:"cat", zoom:1, x:0, y:0},
     {id:11, src:"/assets/strawberry.jpg", answer:"strawberry", zoom:1, x:0, y:0},
     {id:12, src:"/assets/zebra.jpg", answer:"zebra", zoom:1, x:0, y:0},
 ]
@@ -23,7 +23,6 @@ crops = [
 //static files path
 //we want to serve static files from the public folder as we don't want clients to have access to server files
 app.use('/', express.static(path.join(__dirname, 'public')));
-
 
 // route to main page
 app.get('/', (req, res) => {
