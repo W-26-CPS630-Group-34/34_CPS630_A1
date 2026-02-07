@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add/Delete Levels!</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- POST Form -->
@@ -14,9 +15,12 @@
             <input type="number"    id="new-id"     placeholder="ID"            required>
             <input type="text"      id="new-src"    placeholder="src"           required>
             <input type="text"      id="new-answer" placeholder="Answer"        required>
+            <br>
+            <!-- move these last three to a step 2 form -->
             <input type="number"    id="new-zoom"   placeholder="Zoom"          required>
             <input type="number"    id="new-x"      placeholder="Offset X"      required>
             <input type="number"    id="new-y"      placeholder="Offset y"      required>
+            <br>
             <button type="submit">Add Level</button>
         </form>
     </div>
@@ -29,7 +33,7 @@
             <button type="submit">Delete Level</button>
         </form>
     </div>
-    <a href="/" class="btn">Home</a>
+    <a href="/" class="btn" id="home">Home</a>
     <script src="js/crop.js"></script>
 </body>
 </html>

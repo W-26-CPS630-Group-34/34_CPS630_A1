@@ -6,18 +6,18 @@ const PORT      = 8080;     // default web: 80. default relational db: 443
 
 // put list of JSONs here
 crops = [
-    {id:1, src:"/assets/cake.jpg", answer:"cake", zoom:1, x:0, y:0},
-    {id:2, src:"/assets/tiger.jpg", answer:"tiger", zoom:1, x:0, y:0},
-    {id:3, src:"/assets/cookie.jpg", answer:"cookie", zoom:1, x:0, y:0},
-    {id:4, src:"/assets/cupcake.jpg", answer:"cupcake", zoom:1, x:0, y:0},
-    {id:5, src:"/assets/elephant.jpg", answer:"elephant", zoom:1, x:0, y:0},
-    {id:6, src:"/assets/keyboard.jpg", answer:"keyboard", zoom:1, x:0, y:0},
-    {id:7, src:"/assets/waterfall.jpg", answer:"waterfall", zoom:1, x:0, y:0},
-    {id:8, src:"/assets/pizza.jpg", answer:"pizza", zoom:1, x:0, y:0},
-    {id:9, src:"/assets/popcorn.jpg", answer:"popcorn", zoom:1, x:0, y:0},
-    {id:10, src:"/assets/cat.jpg", answer:"cat", zoom:1, x:0, y:0},
-    {id:11, src:"/assets/strawberry.jpg", answer:"strawberry", zoom:1, x:0, y:0},
-    {id:12, src:"/assets/zebra.jpg", answer:"zebra", zoom:1, x:0, y:0},
+    {id:1, src:"/assets/cake.jpg", answer:"cake", zoom:6, x:-19, y:-17},
+    {id:2, src:"/assets/tiger.jpg", answer:"tiger", zoom:5, x:0, y:0},
+    {id:3, src:"/assets/cookie.jpg", answer:"cookie", zoom:5, x:0, y:0},
+    {id:4, src:"/assets/cupcake.jpg", answer:"cupcake", zoom:4, x:0, y:18},
+    {id:5, src:"/assets/elephant.jpg", answer:"elephant", zoom:6, x:20, y:15},
+    {id:6, src:"/assets/keyboard.jpg", answer:"keyboard", zoom:6, x:-37, y:-15},
+    {id:7, src:"/assets/waterfall.jpg", answer:"waterfall", zoom:4, x:10, y:5},
+    {id:8, src:"/assets/pizza.jpg", answer:"pizza", zoom:6, x:-8, y:-10},
+    {id:9, src:"/assets/popcorn.jpg", answer:"popcorn", zoom:5, x:-40, y:40},
+    {id:10, src:"/assets/cat.jpg", answer:"cat", zoom:5, x:0, y:0},
+    {id:11, src:"/assets/strawberry.jpg", answer:"strawberry", zoom:5, x:0, y:0},
+    {id:12, src:"/assets/zebra.jpg", answer:"zebra", zoom:4, x:-10, y:10},
 ]
 
 //static files path

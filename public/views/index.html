@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome To CropGuesser</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- link to /crop -->
@@ -18,5 +19,11 @@
             <button type="submit">Play!</button>
         </form>
     </div>
+    <script>
+        let palette = ['#7A0027', '#750000', '#8b3e18', '#8b7618', '#457014', '#003887', '#3a0057'];
+        palette.sort( () => Math.random()-0.5 );
+        document.body.style.backgroundColor = palette.pop();
+    </script>
+    <!-- js to change color randomly here -->
 </body>
 </html>
