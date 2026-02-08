@@ -2,6 +2,10 @@ let palette = ['#7A0027', '#750000', '#8b3e18', '#8b7618', '#457014', '#003887',
 palette.sort( () => Math.random()-0.5 );
 document.body.style.backgroundColor = palette.pop();
 
+const img = document.querySelector("img"); //select the image
+img.addEventListener("contextmenu", e => e.preventDefault());
+img.addEventListener("dragstart", e => e.preventDefault());
+
 document.querySelector('#new-form').addEventListener('submit', async (e) => {
     e.preventDefault(); //prevent form submission
     const newCrop = {

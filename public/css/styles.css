@@ -35,3 +35,8 @@ img {
 a {
     color: white;
 }
+
+/*disable mouse clicks*/
+img {
+  pointer-events: none; 
+}
