@@ -29,9 +29,15 @@
         const crops = await loadCrops();
         listOfCrops = crops;
     }
-    listOfCrops.sort( () => Math.random()-0.5 );
-    for (const crop of listOfCrops) {
-        await initGame(crop); // waits for player to hit Next
+
+
+    if (listOfCrops.length == 0) {
+        alert('No levels found, skipping to end of game');
+    } else {
+        listOfCrops.sort( () => Math.random()-0.5 );
+        for (const crop of listOfCrops) {
+            await initGame(crop); // waits for player to hit Next
+        }
     }
 
     changeBG();
@@ -58,11 +64,14 @@ async function loadCrop(id) {
     try {
         const response = await fetch(`/api/crop/id/${id}`);
         const result = await response.json();
+        if (response.status === 404) {
+            return false;
+        }
         return result;
     } catch (error) {
         console.error('Error loading level:', error);
     }
-    return {};
+    return false;
 }
 
 

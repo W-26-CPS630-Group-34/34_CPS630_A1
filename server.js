@@ -14,7 +14,7 @@ crops = [
     {id:6, src:"/assets/keyboard.jpg", answer:"keyboard", zoom:6, x:-37, y:-15},
     {id:7, src:"/assets/waterfall.jpg", answer:"waterfall", zoom:4, x:10, y:5},
     {id:8, src:"/assets/pizza.jpg", answer:"pizza", zoom:6, x:-8, y:-10},
-    {id:9, src:"/assets/popcorn.jpg", answer:"popcorn", zoom:5, x:-40, y:40},
+    {id:9, src:"/assets/puppy.jpg", answer:"puppy", zoom:5, x:0, y:-10},
     {id:10, src:"/assets/cat.jpg", answer:"cat", zoom:5, x:0, y:0},
     {id:11, src:"/assets/strawberry.jpg", answer:"strawberry", zoom:5, x:0, y:0},
     {id:12, src:"/assets/zebra.jpg", answer:"zebra", zoom:4, x:-10, y:10},

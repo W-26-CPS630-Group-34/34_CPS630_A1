@@ -3,9 +3,10 @@ palette.sort( () => Math.random()-0.5 );
 document.body.style.backgroundColor = palette.pop();
 
 const img = document.querySelector("img"); //select the image
-img.addEventListener("contextmenu", e => e.preventDefault());
-img.addEventListener("dragstart", e => e.preventDefault());
-
+if (img) {
+    img.addEventListener("contextmenu", e => e.preventDefault());
+    img.addEventListener("dragstart", e => e.preventDefault());
+}
 document.querySelector('#new-form').addEventListener('submit', async (e) => {
     e.preventDefault(); //prevent form submission
     const newCrop = {
