@@ -46,7 +46,7 @@
     // when game is over, redirect back to root (index.html)
     document.querySelector('#heading').innerHTML = "<h1>THANKS FOR PLAYING!</h1>";
     document.querySelector('#image').innerHTML = "<h3>Click the button below to head back to the home page</h3>";
-    document.querySelector('#interact').innerHTML = `<a href="/" class="btn" id="home">Home</a>`;
+    document.querySelector('#interact').innerHTML = `<a href="/">HOME</a>`;
 })();
 
 async function loadCrops() {
@@ -91,7 +91,8 @@ function initGame(crop) {
         divInt.innerHTML = `
         <form id="guess-form">
             <input type="text" id="guess" required>
-            <button type="submit">Guess!</button>
+            <br>
+            <button type="submit" class="m_btn">Guess!</button>
         </form>
         `;
 
