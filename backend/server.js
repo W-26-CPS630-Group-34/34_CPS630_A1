@@ -5,7 +5,7 @@ const path      = require('path');
 const { default: mongoose } = require('mongoose');
 const Level = require('./models/Level');
 
-const PORT          = 8080;
+const PORT          = 5000;
 const DATABASE_HOST = 'localhost';
 const DATABASE_PORT = 27017;
 
@@ -50,11 +50,11 @@ async function addLevelsToMongoDB() {
             const newLevel = new Level(level);
             newLevel.save()
                 .then(() => console.log('Level added with image of a(n): ' + level.answer))
-                .catch(err => console.error('Error adding image of a(n): ' + level.answer + ' ' + err));
+                .catch(err => console.error('Error adding level with image of a(n): ' + level.answer + ' ' + err));
         });
     }
     else {
-        console.log('Boosk already exist. Not adding test books.');
+        console.log('Levels already exist. Not adding test books.');
         return;
     }
 }
@@ -86,12 +86,24 @@ app.get('/crop', (req, res) => {
 /*************************************************/
 
 //get all game levels
+/* old way 
 app.get('/api/crop', (req, res) => {
     res.json(crops);
 });
+*/
+app.get('/api/crop', async (req, res) => {
+    try {
+        const levels = await Level.find({}).lean(); 
+        res.status(200).json(levels); 
+    } catch (err) { 
+        console.error("Mongo GET /api/levels error: ", err)
+        res.status(500).json({error: "Database ", details: err.message});
+    }
+});
 
 //get a level
-app.get('/api/crop/id/:id', (req, res) => {
+/* old way 
+app.get('/api/crop/id/:id', async (req, res) => {
     const id = parseInt(req.params.id);
     const crop = crops.find(c => c.id == id);
 
@@ -100,10 +112,28 @@ app.get('/api/crop/id/:id', (req, res) => {
     } else {
         res.status(404).json({ error: "Level not found" });  //status 404 code = NOT FOUND
     }
-
 });
+*/
+app.get('/api/crop/id/:id', async (req, res) => {
+    try {
+        const id = req.params.id; 
+        const level = await Level.findOne({id: id}).lean();
+        if (level) { 
+            res.status(200).json(level);
+        }
+        else {
+            res.status(404).json({error: "Level not found"}); 
+        }
+
+    } catch (err) {
+        console.error("GET by ID error:", err); 
+        res.status(500).json({ error: "Database error:" }); 
+    };
+}); 
+
 
 //create new level
+/* old way
 app.post('/api/crop', express.json(), (req, res) => {
     const newCrop = req.body;
 
@@ -122,8 +152,46 @@ app.post('/api/crop', express.json(), (req, res) => {
         res.status(400).json({ error: "Invalid level data" });
     }
 });
+*/
+app.post('/api/crop', async (req, res) => {
+  try {
+    const newCrop = req.body;
+
+    const required = ["id", "src", "answer", "zoom"];
+    const missing = required.filter(k => newCrop?.[k] === undefined || newCrop?.[k] === null || newCrop?.[k] === "");
+    if (missing.length) {
+      return res.status(400).json({ error: "Invalid level data", missing });
+    }
+
+    const id = Number(newCrop.id);
+    if (Number.isNaN(id)) {
+      return res.status(400).json({ error: "Invalid id (must be a number)" });
+    }
+
+    const dup = await Level.findOne({ $or: [{ id }, { src: newCrop.src }] }).lean();
+    if (dup) {
+      return res.status(409).json({ error: "Duplicate level (id or src already exists)" });
+    }
+
+    const docToCreate = {
+      id,
+      src: newCrop.src,
+      answer: newCrop.answer,
+      zoom: newCrop.zoom,
+      x: newCrop.x ?? 0,
+      y: newCrop.y ?? 0,
+    };
+
+    const created = await Level.create(docToCreate);
+    return res.status(201).json(created.toObject());
+  } catch (err) {
+    console.error("Mongo POST /api/crop error:", err);
+    return res.status(500).json({ error: "Database error", details: err.message });
+  }
+});
 
 //delete a level
+/* old way 
 app.delete('/api/crop/id/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const index = crops.findIndex(c => c.id === id);
@@ -134,6 +202,24 @@ app.delete('/api/crop/id/:id', (req, res) => {
     } else {
         res.status(404).json({ error: "Level not found" });  //status 404 code = NOT FOUND
     }
+});
+*/
+app.delete('/api/crop/id/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (Number.isNaN(id)) {
+      return res.status(400).json({ error: "Invalid id param (must be a number)" });
+    }
+
+    const deleted = await Level.findOneAndDelete({ id }).lean();
+    if (!deleted) return res.status(404).json({ error: "Level not found" });
+
+    // Common pattern: 200 with deleted doc, or 204 with no body.
+    return res.status(200).json(deleted);
+  } catch (err) {
+    console.error("Mongo DELETE /api/crop/id/:id error:", err);
+    return res.status(500).json({ error: "Database error", details: err.message });
+  }
 });
 
 //starts server
