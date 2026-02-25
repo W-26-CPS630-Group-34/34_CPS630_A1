@@ -26,19 +26,39 @@ db.on('open', function() {
 
 // put list of JSONs here
 crops = [
-    {id:1, src:"/assets/cake.jpg", answer:"cake", zoom:6, x:-19, y:-17},
-    {id:2, src:"/assets/tiger.jpg", answer:"tiger", zoom:5, x:0, y:0},
-    {id:3, src:"/assets/cookie.jpg", answer:"cookie", zoom:5, x:0, y:0},
-    {id:4, src:"/assets/cupcake.jpg", answer:"cupcake", zoom:4, x:0, y:18},
-    {id:5, src:"/assets/elephant.jpg", answer:"elephant", zoom:6, x:20, y:15},
-    {id:6, src:"/assets/keyboard.jpg", answer:"keyboard", zoom:6, x:-37, y:-15},
-    {id:7, src:"/assets/waterfall.jpg", answer:"waterfall", zoom:4, x:10, y:5},
-    {id:8, src:"/assets/pizza.jpg", answer:"pizza", zoom:6, x:-8, y:-10},
-    {id:9, src:"/assets/puppy.jpg", answer:"puppy", zoom:5, x:0, y:-10},
-    {id:10, src:"/assets/cat.jpg", answer:"cat", zoom:5, x:0, y:0},
-    {id:11, src:"/assets/strawberry.jpg", answer:"strawberry", zoom:5, x:0, y:0},
-    {id:12, src:"/assets/zebra.jpg", answer:"zebra", zoom:4, x:-10, y:10},
+    {id:1, src:"/assets/cake.jpg", answer:"cake", zoom:6, offsetX:-19, offsetY:-17},
+    {id:2, src:"/assets/tiger.jpg", answer:"tiger", zoom:5, offsetX:0, offsetY:0},
+    {id:3, src:"/assets/cookie.jpg", answer:"cookie", zoom:5, offsetX:0, offsetY:0},
+    {id:4, src:"/assets/cupcake.jpg", answer:"cupcake", zoom:4, offsetX:0, offsetY:18},
+    {id:5, src:"/assets/elephant.jpg", answer:"elephant", zoom:6, offsetX:20, offsetY:15},
+    {id:6, src:"/assets/keyboard.jpg", answer:"keyboard", zoom:6, offsetX:-37, offsetY:-15},
+    {id:7, src:"/assets/waterfall.jpg", answer:"waterfall", zoom:4, offsetX:10, offsetY:5},
+    {id:8, src:"/assets/pizza.jpg", answer:"pizza", zoom:6, offsetX:-8, offsetY:-10},
+    {id:9, src:"/assets/puppy.jpg", answer:"puppy", zoom:5, offsetX:0, offsetY:-10},
+    {id:10, src:"/assets/cat.jpg", answer:"cat", zoom:5, offsetX:0, offsetY:0},
+    {id:11, src:"/assets/strawberry.jpg", answer:"strawberry", zoom:5, offsetX:0, offsetY:0},
+    {id:12, src:"/assets/zebra.jpg", answer:"zebra", zoom:4, offsetX:-10, offsetY:10},
 ]
+
+async function addLevelsToMongoDB() {
+    const levelCount = await Level.countDocuments();
+
+    if (levelCount === 0) {
+        console.log('Adding test books to db ...');
+
+        crops.forEach(level => {
+            const newLevel = new Level(level);
+            newLevel.save()
+                .then(() => console.log('Level added with image of a(n): ' + level.answer))
+                .catch(err => console.error('Error adding image of a(n): ' + level.answer + ' ' + err));
+        });
+    }
+    else {
+        console.log('Boosk already exist. Not adding test books.');
+        return;
+    }
+}
+addLevelsToMongoDB();
 
 //static files path
 //we want to serve static files from the public folder as we don't want clients to have access to server files
