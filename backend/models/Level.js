@@ -8,7 +8,7 @@ const LevelSchema = new mongoose.Schema({
         trim:       true
     },
     src: {
-        // what type is an image lol?
+        type: String,
         unique:     false,
         required:   true
     },
@@ -30,7 +30,7 @@ const LevelSchema = new mongoose.Schema({
         required:   true
     },
     offsetY: {
-        type:       String,
+        type:       Number,
         unique:     false,
         required:   true,    }
 });
