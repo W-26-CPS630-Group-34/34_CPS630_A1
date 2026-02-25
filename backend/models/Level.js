@@ -1,40 +1,38 @@
 const mongoose = require('mongoose');
 
 const LevelSchema = new mongoose.Schema({
-    isbn: {
+    id: {
         type:       String,
         unique:     true,
         required:   true,
         trim:       true
     },
-    hasImage: {
-        type:       Boolean,
+    src: {
+        // what type is an image lol?
         unique:     false,
         required:   true
     },
-    title: {
+    answer: {
         type:       String,
+        unique:     true,
+        required:   true,
+        trim:       true
+    },
+    zoom: {
+        type:       Number,
         unique:     false,
         required:   true,
         trim:       true
     },
-    author: {
-        type:       String,
-        unique:     false,
-        required:   true,
-        trim:       true
-    },
-    year: {
+    offsetX: {
         type:       Number,
         unique:     false,
         required:   true
     },
-    note: {
+    offsetY: {
         type:       String,
         unique:     false,
-        required:   false,
-        trim:       true
-    }
+        required:   true,    }
 });
 
 const Level = mongoose.model('level', LevelSchema);
