@@ -12,6 +12,12 @@ const LevelSchema = new mongoose.Schema({
         unique:     false,
         required:   true
     },
+    /* IF WE WANT THE SRC TO BE AN IMAGE ITSELF, SO THE IMAGE IS STORED IN MONGODB, THEN WE DO TYPE BUFFER
+    src: {
+    data: { type: Buffer, required: true },        // the actual image bytes
+    contentType: { type: String, required: true }  // e.g. "image/png", "image/jpeg"
+    },
+    */
     answer: {
         type:       String,
         unique:     true,
